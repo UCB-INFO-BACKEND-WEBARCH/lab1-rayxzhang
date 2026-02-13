@@ -67,8 +67,9 @@ def check_password_strength(password):
     return {
         "password": password,
         "score": score,
-        "strength": "Weak" if score < 40 else "Medium" if score < 70 else "Strong"
-
+        "strength": "Weak" if score < 40 else "Medium" if score < 70 else "Strong",
+        "feedback": "Password is strong" if score >= 70 else "Password is medium" if score >= 40 else "Password is weak"
+    }
 
 # ============================================
 # TODO 2: Password Generator
@@ -99,7 +100,10 @@ def generate_password(length=12, use_special=True):
           string.digits, and random.choice()
     """
     # TODO: Implement this function
-    pass
+    chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
+    if use_special:
+        chars += string.punctuation
+    return ''.join(random.choice(chars) for _ in range(max(length, 8)))
 
 
 # ============================================

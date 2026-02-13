@@ -51,7 +51,23 @@ def check_password_strength(password):
     Hint: Use .isdigit(), .isupper(), .islower() and string.punctuation
     """
     # TODO: Implement this function
-    pass
+    score = 0
+    if len(password) >= 8:
+        score += 20
+    if len(password) >= 12:
+        score += 10
+    if any(char.isdigit() for char in password):
+        score += 20
+    if any(char.isupper() for char in password):
+        score += 20
+    if any(char in string.punctuation for char in password):
+        score += 20
+    if password not in COMMON_PASSWORDS:
+        score += 10
+    return {
+        "password": password,
+        "score": score,
+        "strength": "Weak" if score < 40 else "Medium" if score < 70 else "Strong"
 
 
 # ============================================
